@@ -1,0 +1,8 @@
+.item {
+    color: bisque;
+}
+
+.item img {
+    width: 250px;
+    border-radius: 30px;
+}
