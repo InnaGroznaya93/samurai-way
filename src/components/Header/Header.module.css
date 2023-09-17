@@ -1,12 +1,29 @@
 .header {
     grid-area: h;
     background: radial-gradient(circle, #faf5fa, #e7dffb);
+    position: relative;
 }
 
 .header img {
     width: 100px;
-    /* height: 60px; */
 }
 .loginBlock {
     float: right;
+    position: relative;
+    right: 25px;
+    top: 13px;
+}
+
+.logName {
+    font-weight: 500;
+}
+
+.btn {
+    border: none;
+    background-color: white;
+    width: 80px;
+    height: 25px;
+    font-weight: 500;
+    font-family: inherit;
+    color: inherit;
 }

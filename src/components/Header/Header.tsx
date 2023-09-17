@@ -19,7 +19,7 @@ const Header = (props:  HeaderContainerPropsType) => {
 
                 <div className={classes.loginBlock}>
                     {props.isAuth &&
-                        <div>{props.login} - <button onClick={props.logoutTC}>Logout</button></div>}
+                        <div className={classes.logName}>{props.login} - <button className={classes.btn} onClick={props.logoutTC}>Logout</button></div>}
                 </div>
             </header>
     );

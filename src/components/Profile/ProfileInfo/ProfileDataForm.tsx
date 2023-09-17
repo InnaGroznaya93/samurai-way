@@ -58,21 +58,25 @@ export const ProfileDataForm = (props: PropsType) => {
         <button type={"submit"}>Save</button>
       </div>
       <div>
+        <b>Full name:</b>
         <input
           placeholder={"Full name"}
           {...formik.getFieldProps("fullName")}
         />
       </div>
       <div>
+        <b>Looking for a job:</b>
         <input type={"checkbox"} {...formik.getFieldProps("lookingForAJob")} />
       </div>
       <div>
+        <b>My professional skills:</b>
         <textarea
           placeholder={"lookingForAJobDescription"}
           {...formik.getFieldProps("lookingForAJobDescription")}
         />
       </div>
       <div>
+        <b>About me:</b>
         <textarea
           placeholder={"About me"}
           {...formik.getFieldProps("aboutMe")}

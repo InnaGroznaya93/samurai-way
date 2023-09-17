@@ -19,6 +19,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
     props;
 
   const [editMode, setEditMode] = useState(false);
+  const [wantToChangePhoto, setWantToChangePhoto] = useState(false)
 
   if (!props.profile) {
     return <Preloader />;
@@ -46,6 +47,9 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
           className={classes.mainPhoto}
         />
         {isOwner && (
+          <button onClick={() => setWantToChangePhoto(!wantToChangePhoto)}>change photo</button>  
+        )}
+        {wantToChangePhoto && (
           <input type={"file"} onChange={(e) => onMainPhotoSelected(e)} />
         )}
 
