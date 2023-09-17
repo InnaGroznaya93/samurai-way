@@ -8,16 +8,31 @@ let initialState: ProfilePageType = {
         {id: 4, message: `oh, how it's going?`, likesCount: 45},
     ],
     profile:  {
-        name: "chrw-user",
-        id: 27903,
-        uniqueUrlName: null,
-        photos: {
-            small: "https://social-network.samuraijs.com/activecontent/images/users/28018/user-small.jpg?v=1",
-            large: "https://social-network.samuraijs.com/activecontent/images/users/28018/user.jpg?v=1"
-        },
-        followed: false
+        fullName: "chrw-user",
+    userId: 27903,
+    uniqueUrlName: null,
+    photos: {
+      small:
+        "https://social-network.samuraijs.com/activecontent/images/users/28018/user-small.jpg?v=1",
+      large:
+        "https://social-network.samuraijs.com/activecontent/images/users/28018/user.jpg?v=1",
     },
-    status: "",
+    followed: false,
+    aboutMe: null,
+    contacts: {
+        facebook: '',
+        github: '',
+        instagram: '',
+        mainLink: '',
+        twitter: '',
+        vk: '',
+        website: '',
+        youtube: ''
+    },
+    lookingForAJob: false,
+    lookingForAJobDescription: null
+    },
+    status: ""
 }
 
 it('length of posts shoud be incremented', () => {

@@ -1,6 +1,7 @@
 import { PostDataType } from "./store";
 import { Dispatch } from "redux";
 import { profileAPI, usersAPI } from "../api/api";
+import { AppStateType, ThunkDispatchType } from "./redux-store";
 
 const ADD_POST = "ADD-POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
@@ -14,8 +15,8 @@ let initialState: ProfilePageType = {
     { id: 4, message: `oh, how it's going?`, likesCount: 45 },
   ],
   profile: {
-    name: "chrw-user",
-    id: 27903,
+    fullName: "chrw-user",
+    userId: 27903,
     uniqueUrlName: null,
     photos: {
       small:
@@ -24,8 +25,21 @@ let initialState: ProfilePageType = {
         "https://social-network.samuraijs.com/activecontent/images/users/28018/user.jpg?v=1",
     },
     followed: false,
+    aboutMe: null,
+    contacts: {
+      facebook: "",
+      github: "",
+      instagram: "",
+      mainLink: "",
+      twitter: "",
+      vk: "",
+      website: "",
+      youtube: "",
+    },
+    lookingForAJob: false,
+    lookingForAJobDescription: null,
   },
-  status: "",
+  status: ""
 };
 
 export const profileReducer = (
@@ -52,6 +66,12 @@ export const profileReducer = (
       return {
         ...state,
         postsData: state.postsData.filter((p) => p.id !== action.postId),
+      };
+
+    case "SAVE-PHOTO-SUCCESS":
+      return {
+        ...state,
+        profile: { ...state.profile, photos: action.photos },
       };
 
     default:
@@ -83,38 +103,71 @@ export const deletePostAC = (postId: number) =>
     postId,
   } as const);
 
+export const savePhotoSuccess = (photos: PhotosType) =>
+  ({
+    type: "SAVE-PHOTO-SUCCESS",
+    photos,
+  } as const);
+
 //thunks
-export const getUserProfileTC = (userId: string) => {
+export const getUserProfileTC = (userId: number) => {
   return async (dispatch: Dispatch) => {
     let response = await usersAPI.getProfile(userId);
     dispatch(setUserProfile(response.data));
   };
 };
 
-export const getStatusTC = (userId: string) => async (dispatch: Dispatch) => {
+export const getStatusTC = (userId: number) => async (dispatch: Dispatch) => {
   // debugger
-  let res = await profileAPI.getStatus(userId)
-    dispatch(setStatusAC(res.data));
+  let res = await profileAPI.getStatus(userId);
+  dispatch(setStatusAC(res.data));
 };
 
 export const updateStatusTC =
   (status: string | null) => async (dispatch: Dispatch) => {
-    let res = await profileAPI.updateStatus(status)
+    // try{
+      let res = await profileAPI.updateStatus(status);
       if (res.data.resultCode === 0) {
         dispatch(setStatusAC(status));
       }
+    // } catch(e) {
+ 
+    // }
+  };
+
+export const savePhoto = (file: any) => async (dispatch: Dispatch) => {
+  let response = await profileAPI.savePhoto(file);
+  if (response.data.resultCode === 0) {
+    dispatch(savePhotoSuccess(response.data.data.photos));
+  }
+};
+
+export const saveProfile =
+  (profile: ProfileType) =>
+  async (dispatch: ThunkDispatchType, getState: () => AppStateType) => {
+    const userId = getState().auth.data.id;
+    let response = await profileAPI.saveProfile(profile);
+    if (response.data.resultCode === 0) {
+      if (userId) {
+        dispatch(getUserProfileTC(userId));
+      }
+    } else {
+      return response.data.messages[0];
+    }
   };
 
 export type SetUserProfileType = ReturnType<typeof setUserProfile>;
 export type AddPostActionType = ReturnType<typeof addPostActionCreator>;
 export type SetStatusACType = ReturnType<typeof setStatusAC>;
 export type DeletePostACType = ReturnType<typeof deletePostAC>;
+export type SavePhotoSuccessType = ReturnType<typeof savePhotoSuccess>;
 
 export type ActionTypes =
   | AddPostActionType
   | SetUserProfileType
   | SetStatusACType
-  | DeletePostACType;
+  | SavePhotoSuccessType
+  | DeletePostACType
 
 export type ProfilePageType = {
   status: null | string;
@@ -123,11 +176,26 @@ export type ProfilePageType = {
 };
 
 export type ProfileType = {
-  name: string;
-  id: number;
+  fullName: string;
+  userId: number;
   uniqueUrlName: null | string;
   photos: PhotosType;
   followed: boolean;
+  aboutMe: string | null;
+  contacts: ContactsType;
+  lookingForAJob: boolean;
+  lookingForAJobDescription: string | null;
+};
+
+export type ContactsType = {
+  facebook: string | null;
+  github: string | null;
+  instagram: string | null;
+  mainLink: string | null;
+  twitter: string | null;
+  vk: string | null;
+  website: string | null;
+  youtube: string | null;
 };
 
 export type PhotosType = {

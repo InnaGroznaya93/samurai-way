@@ -1,14 +1,23 @@
 .nav {
     grid-area: n;
-    background-color: bisque;
+    /* background-color: #f50713; */
+    background-color: #faf5fa;
     padding: 20px;
+    z-index: 1;
 }
 
 .item a {
-    color: crimson;
+    color: #382557;
     text-decoration: none;
 }
 
 .item a.active {
-    color: blueviolet;
+    color: #a974fe;
+}
+
+.none {
+    display: none;
+}
+.eclipse {
+    background-color: #e7dffb;
 }

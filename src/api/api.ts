@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ProfileType } from "../redux/profile-reducer";
 
 const instance = axios.create({
     withCredentials: true,
@@ -20,22 +21,31 @@ export const usersAPI = {
     unfollow(userId: number) {
         return instance.delete(`follow/${userId}`).then(response => response)
     },
-    getProfile(userId: string){
+    getProfile(userId: number){
         console.warn('Obsolete method. Please, use profileAPI object')
         return profileAPI.getProfile(userId)
     }
 }
 
 export const profileAPI = {
-    getProfile(userId: string){
-        return instance.get(`profile/` + userId)
-            .then(response => response)
+    getProfile(userId: number){
+        return instance.get(`profile/${userId}`)
     },
-    getStatus(userId: string) {
+    getStatus(userId: number) {
         return instance.get(`profile/status/${userId}`)
     },
     updateStatus(status: string | null) {
         return instance.put(`profile/status`, {"status": status})
+    },
+    savePhoto(photoFile: any) {
+        const formData = new FormData()
+        formData.append("image", photoFile)
+        return instance.put(`profile/photo`, formData, {headers: {
+            'Content-Type': 'multipart/form-data'
+        }})
+    },
+    saveProfile(profile: ProfileType) {
+        return instance.put(`profile`, profile)
     }
 }
 
@@ -48,5 +58,11 @@ export const authAPI = {
     },
     logout() {
         return instance.delete(`auth/login`)
+    }
+}
+
+export const securityAPI = {
+    getCaptchaURL() {
+        return instance.get(`security/get-captcha-url`)
     }
 }

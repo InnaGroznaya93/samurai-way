@@ -1,10 +1,11 @@
 .header {
     grid-area: h;
-    background-color: aqua;
+    background: radial-gradient(circle, #faf5fa, #e7dffb);
 }
 
 .header img {
-    width: 70px;
+    width: 100px;
+    /* height: 60px; */
 }
 .loginBlock {
     float: right;

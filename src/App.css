@@ -1,16 +1,22 @@
 .app-wrapper {
+  min-height: 100vh;
   margin: 0 auto;
   display: grid;
   grid-template-areas:
   'h h'
   'n c';
   grid-template-rows: 60px 1fr;
-  grid-template-columns: 2fr 10fr;
+  grid-template-columns: 2fr 9fr;
   /*grid-gap: 10px;*/
   width: 1200px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  /* letter-spacing: 0.5px; */
+  line-height: 2;
+  color: #382557;
 }
 
 .app-wrapper-content {
   grid-area: c;
-  background-color: blueviolet;
+  background-color: #e7dffb;
 }
