@@ -14,6 +14,8 @@ export type ProfileInfoPropsType = {
   savePhoto: any;
   saveProfile: (formData: ProfileInfoDataType) => Promise<string>;
 };
+
+
 const ProfileInfo = (props: ProfileInfoPropsType) => {
   const { profile, status, updateStatusTC, isOwner, savePhoto, saveProfile } =
     props;
@@ -28,6 +30,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
   const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.length) {
       savePhoto(e.target.files[0]);
+      setWantToChangePhoto(false)
     }
   };
 
@@ -42,17 +45,31 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
   return (
     <div>
       <div className={classes.descriptionBlock}>
+        <div className={classes.mainBlock}>
         <img
           src={profile.photos.large || userPhoto}
           className={classes.mainPhoto}
         />
         {isOwner && (
-          <button onClick={() => setWantToChangePhoto(!wantToChangePhoto)}>change photo</button>  
+          <div>
+             <button className={classes.btn} onClick={() => setWantToChangePhoto(!wantToChangePhoto)}>change photo</button> 
+          </div>
+          
         )}
-        {wantToChangePhoto && (
-          <input type={"file"} onChange={(e) => onMainPhotoSelected(e)} />
-        )}
-
+        {wantToChangePhoto ? (
+          <div>
+            <input type={"file"} onChange={(e) => onMainPhotoSelected(e)} />
+          </div>
+        )
+        : <div style={{height: "32px"}}></div>}
+        <ProfileStatusWithHooks
+          status={status}
+          updateStatusTC={updateStatusTC}
+          isOwner={isOwner}
+        />
+        </div>
+        
+        <div className={classes.dataBlock}>
         {editMode ? (
           <ProfileDataForm profile={profile} onSubmit={onSubmit} />
         ) : (
@@ -63,17 +80,12 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
               setEditMode(true);
             }}
           />
-        )}
-
-        <ProfileStatusWithHooks
-          status={status}
-          updateStatusTC={updateStatusTC}
-          isOwner={isOwner}
-        />
+        )}</div>    
       </div>
     </div>
   );
 };
+
 
 type ProfileDataPropsType = {
   profile: ProfileType;
@@ -87,9 +99,10 @@ const ProfileData = (props: ProfileDataPropsType) => {
     <div>
       {isOwner && (
         <div>
-          <button onClick={goToEditMode}>Edit</button>
+          <button className={classes.btn} onClick={goToEditMode}>Edit</button>
         </div>
       )}
+      <div className={classes.infoBlock}>
       <div>
         <b>Full name</b>: {profile.fullName}
       </div>
@@ -114,6 +127,7 @@ const ProfileData = (props: ProfileDataPropsType) => {
             />
           );
         })}
+      </div>
       </div>
     </div>
   );

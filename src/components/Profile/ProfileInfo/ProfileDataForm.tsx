@@ -33,7 +33,6 @@ export const ProfileDataForm = (props: PropsType) => {
       debugger
       let fieldName: string
       onSubmit(values).then((res) => {
-        console.log(res);
         //@ts-ignore
         setError(res);
         if (res) {
@@ -55,14 +54,16 @@ export const ProfileDataForm = (props: PropsType) => {
   return (
     <form onSubmit={formik.handleSubmit}>
       <div>
-        <button type={"submit"}>Save</button>
+        <button className={classes.btn} type={"submit"}>Save</button>
       </div>
-      <div>
+      <div className={classes.infoBlock}>
         <b>Full name:</b>
+        <div>
         <input
           placeholder={"Full name"}
           {...formik.getFieldProps("fullName")}
         />
+        </div>
       </div>
       <div>
         <b>Looking for a job:</b>
@@ -77,10 +78,12 @@ export const ProfileDataForm = (props: PropsType) => {
       </div>
       <div>
         <b>About me:</b>
+        <div>
         <textarea
           placeholder={"About me"}
           {...formik.getFieldProps("aboutMe")}
         />
+        </div>
       </div>
       <div>
         <b>Contacts</b>:{" "}
@@ -92,7 +95,9 @@ export const ProfileDataForm = (props: PropsType) => {
           return (
             <div key={key} className={classes.contact}>
               <b>
-                {key}: <input placeholder={key} value={value ?? ""} {...rest} />
+                {key}: <div>
+                <input placeholder={key} value={value ?? ""} {...rest} />
+                </div>
               </b>
               {errorFieldName === key && (
                 <div

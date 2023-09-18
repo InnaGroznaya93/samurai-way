@@ -1,14 +1,15 @@
-.img {
-    width: 900px;
-    height: 250px;
-}
-
 .item {
-    color: bisque;
+    color: #382557;
 }
 
 .descriptionBlock {
-    padding: 10px;
+    padding-top: 35px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.mainBlock {
+    max-width: 100px;
 }
 
 .mainPhoto {
@@ -16,6 +17,26 @@
     border-radius: 50%;
 }
 
+
+.btn {
+    border: none;
+    background-color: white;
+    min-width: 80px;
+    height: 25px;
+    font-weight: 500;
+    font-family: inherit;
+    color: inherit;
+}
+
+.dataBlock {
+max-width: 267px;
+line-height: 160%;
+}
+
+.infoBlock {
+    margin-top: 18px;
+}
+
 .contact {
-    padding-left: 10px;
+    padding-left: 25px;
 }

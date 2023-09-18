@@ -1,15 +1,13 @@
-import React, {useRef} from 'react';
+import React, {KeyboardEvent, useRef} from 'react';
 import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
 import {PostDataType} from "../../../redux/store";
 import {useFormik} from "formik";
 
-
 type MyPostsPropsType = {
     postsData: PostDataType[]
     addPost: (newPost: string) => void
 }
-
 
 const MyPosts = React.memo((props: MyPostsPropsType) => {
 
@@ -28,7 +26,15 @@ const MyPosts = React.memo((props: MyPostsPropsType) => {
             </div>
         );
     })
+
+
 const AddNewPostForm = (props: { addPost: (newPost: string) => void }) => {
+
+    const onEnterAddPost = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+        if(e.code === 'Enter') {
+            formik.handleSubmit()
+        }
+    }
 
     type FormikErrorsType = {
         newPost?: string
@@ -52,18 +58,15 @@ const AddNewPostForm = (props: { addPost: (newPost: string) => void }) => {
         }
     })
     return (<div>
-        <form action={''} onSubmit={formik.handleSubmit}>
+        <form action={''} onSubmit={formik.handleSubmit} className={classes.addPostField}>
             <div>
-                <textarea {...formik.getFieldProps('newPost')}/>
+                <textarea {...formik.getFieldProps('newPost')} className={classes.textarea} onKeyDown={onEnterAddPost}/>
                 {formik.touched.newPost && formik.errors.newPost && <div style={{color: 'red', margin: '5px'}}>{formik.errors.newPost}</div>}
             </div>
             <div>
-                <button type={'submit'} disabled={!!formik.errors.newPost}>Add new post</button>
+                <button className={classes.btn} type={'submit'} disabled={!!formik.errors.newPost}>Add new post</button>
             </div>
         </form>
-        <div>
-            <button>Remove post</button>
-        </div>
     </div>)
 }
 

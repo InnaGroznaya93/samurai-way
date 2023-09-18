@@ -53,7 +53,7 @@ export const profileReducer = (
         message: action.newPost,
         likesCount: 0,
       };
-      return { ...state, postsData: [...state.postsData, newPost] };
+      return { ...state, postsData: [newPost, ...state.postsData] };
     }
 
     case "SET_USER_PROFILE":
