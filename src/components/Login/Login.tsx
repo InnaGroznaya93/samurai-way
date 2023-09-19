@@ -16,7 +16,6 @@ const LoginForm = () => {
     const dispatch = useDispatch()
     const loginError = useSelector<AppStateType, string | null>(state => state.auth.error)
     const captchaURL = useSelector<AppStateType, string | null>(state => state.auth.data.captchaURL)
-    console.log(captchaURL)
 
     const formik = useFormik(
         {
