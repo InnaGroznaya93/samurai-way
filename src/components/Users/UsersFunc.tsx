@@ -1,6 +1,7 @@
 import { UsersPropsType } from "./UsersContainer";
 import { Paginator } from "../common/Paginator/Paginator";
 import { User } from "./User";
+import s from "./users.module.css"
 
 type UsersFuncPropsType = {
   onPageChanged: (pageNumber: number) => void;
@@ -18,7 +19,7 @@ export const UsersFunc = (props: UsersFuncPropsType) => {
         totalItemsCount={totalUsersCount}
         portionSize={10}
       />
-
+      <div className={s.usersBlock}>
       {props.users.map((u) => (
         <User
           key={u.id}
@@ -28,6 +29,7 @@ export const UsersFunc = (props: UsersFuncPropsType) => {
           unfollowThunkCreator={props.unfollowThunkCreator}
         />
       ))}
+      </div>
     </div>
   );
 };

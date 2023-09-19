@@ -1,4 +1,39 @@
-.userPhoto {
+.usersBlock {
+    margin: 30px;
+}
+
+.userCard {
+    padding: 15px;
+    font-size: 14px;
     width: 200px;
+    display: flex;
+}
+
+.userPhoto {
+    width: 180px;
     height: 150px;
+    border-radius: 2%;
+}
+
+.userInfo {
+    margin: 0 20px;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+}
+
+.nameAndStatus {
+    font-weight: 500;
+}
+
+.btn {
+    border: none;
+    background-color: white;
+    min-width: 80px;
+    height: 25px;
+    font-weight: 500;
+    font-family: inherit;
+    color: inherit;
+    position: relative;
+    top: 10px
 }

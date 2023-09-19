@@ -63,11 +63,12 @@ const AddMessageForm = (props: DialogsPropsType) => {
     return (
         <form onSubmit={formik.handleSubmit}>
             <div>
-                <input type={'text'} placeholder={'Enter your message'} {...formik.getFieldProps('message')}></input>
-                {formik.touched.message && formik.errors.message && <div style={{color: 'red', margin: '5px'}}>{formik.errors.message}</div>}
+                <input type={'text'} placeholder={'Enter your message'} {...formik.getFieldProps('message')} className={classes.input}/>
+                {formik.touched.message && formik.errors.message ? <div style={{color: 'red', margin: '3px'}}>{formik.errors.message}</div>
+                : <div style={{height: "38px"}}></div>}
             </div>
             <div>
-                <button type={'submit'}>send</button>
+                <button className={classes.btn} type={'submit'}>send</button>
             </div>
         </form>
     )

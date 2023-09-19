@@ -13,8 +13,7 @@ type PropsType = {
 
 export const User = (props: PropsType) => {
   const {user} = props
-    return <div>
-    <span>
+    return <div className={styles.userCard}>
       <div>
         <NavLink to={"/profile/" + user.id}>
           {" "}
@@ -24,9 +23,11 @@ export const User = (props: PropsType) => {
           />
         </NavLink>
       </div>
+
+      <div className={styles.userInfo}>
       <div>
         {user.followed ? (
-          <button
+          <button className={styles.btn}
             disabled={props.followingInProgress.some((id) => id === user.id)}
             onClick={() => {
               props.unfollowThunkCreator(user.id);
@@ -35,7 +36,7 @@ export const User = (props: PropsType) => {
             Unfollow
           </button>
         ) : (
-          <button
+          <button className={styles.btn}
             disabled={props.followingInProgress.some((id) => id === user.id)}
             onClick={() => {
               props.followThunkCreator(user.id);
@@ -45,16 +46,14 @@ export const User = (props: PropsType) => {
           </button>
         )}
       </div>
-    </span>
-    <span>
-      <span>
-        <div>{user.name}</div>
-        <div>{user.status}</div>
-      </span>
-      <span>
+   
         <div>{"user.location.country"}</div>
         <div>{"user.location.city"}</div>
-      </span>
-    </span>
+
+        <div className={styles.nameAndStatus}>{user.name}</div>
+        <div  className={styles.nameAndStatus}>{user.status}</div>
+ 
+      </div>
+      
   </div>
 }

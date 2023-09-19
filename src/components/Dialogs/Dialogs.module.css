@@ -1,21 +1,38 @@
 .dialogs {
     display: grid;
-    grid-template-columns: 2fr 10fr;
+    grid-template-columns: 3fr 10fr;    
+    margin: 15px 35px;
+    font-weight: 500;
 }
 
 .dialogsItems {
-    padding: 10px;
-    color: aliceblue;
+    color: #382557;
+    font-family: inherit;
 }
 
 .dialogsItems .active {
-    color: gold;
+    color: rgb(255, 0, 212);
 }
 
 .messages {
-    padding: 10px;
+    color: #382557;
 }
 
 .messages .message {
-    color: aliceblue;
+    color: #382557;;
+}
+
+.input {
+    margin-top: 30px;
+    height: 30px;
+}
+
+.btn {
+    border: none;
+    background-color: white;
+    min-width: 80px;
+    height: 25px;
+    font-weight: 500;
+    font-family: inherit;
+    color: inherit;
 }

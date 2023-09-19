@@ -25,6 +25,7 @@ import {
   getTotalUsersCount,
   getUsers,
 } from "../../../src/redux/users-selectors";
+import { WithAuthRedirect } from "../../hoc/withAuthRedirect";
 
 export class UsersAPIComponent extends React.Component<UsersPropsType> {
   constructor(props: UsersPropsType) {
@@ -161,7 +162,7 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
 // })(withRedirect)
 
 export default compose<FC>(
-  // WithAuthRedirect,
+  WithAuthRedirect,
   connect(mapStateToProps, {
     follow: followAC,
     unfollow: unfollowAC,

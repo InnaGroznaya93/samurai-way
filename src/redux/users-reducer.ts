@@ -40,7 +40,7 @@ let initialState: InitialStateType = {
   ],
   pageSize: 10,
   totalUsersCount: 0,
-  currentPage: 3,
+  currentPage: 1,
   isFetching: false,
   followingInProgress: [],
 };
